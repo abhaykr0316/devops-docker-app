@@ -2,10 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/abhaykr0316/devops-docker-app.git'
+                echo 'Code checked out from GitHub'
             }
         }
 
@@ -17,9 +16,9 @@ pipeline {
             }
         }
 
-        stage('List Docker Images') {
+        stage('Verify Docker Image') {
             steps {
-                sh 'docker images'
+                sh 'docker images | grep devops-docker-app'
             }
         }
     }
