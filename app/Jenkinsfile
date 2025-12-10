@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/abhaykr0316/devops-docker-app.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                docker build -t devops-docker-app:latest .
+                '''
+            }
+        }
+
+        stage('List Docker Images') {
+            steps {
+                sh 'docker images'
+            }
+        }
+    }
+}
