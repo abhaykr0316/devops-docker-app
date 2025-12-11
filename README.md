@@ -66,7 +66,86 @@ docker ps
 Stop a container:
 docker stop <container-id>
 
+# 🚀 Local CI/CD Pipeline using Jenkins & Docker
+
+This project demonstrates a **real-world local CI/CD pipeline** where **Jenkins runs inside a Docker container** and automatically builds Docker images from source code stored on **GitHub**.
+
+The project is designed to closely simulate **production-grade CI/CD workflows** and focuses on solving common challenges such as Docker permissions, Jenkins pipeline configuration, and build context management.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Jenkins** (CI/CD automation)
+* **Docker** (containerization)
+* **Git & GitHub** (version control & SCM)
+* **Linux** (container runtime & permissions)
+* **Declarative Jenkins Pipeline** (Pipeline as Code)
+
+---
+
+## 📂 Project Structure
+
+```
+devops-docker-app/
+├── Jenkinsfile
+├── app/
+│   ├── Dockerfile
+│   ├── app.py
+│   └── requirements.txt
+```
+
+---
+
+## ⚙️ CI/CD Workflow
+
+1. Developer pushes code to **GitHub**
+2. Jenkins pulls the repository using **Pipeline script from SCM**
+3. Jenkins executes pipeline stages defined in `Jenkinsfile`
+4. Docker image is built using a Dockerfile located in a subdirectory
+5. Jenkins verifies successful Docker image creation
+
+---
+
+## 🔁 Jenkins Pipeline Stages
+
+* **Checkout Code** – Source code fetched from GitHub
+* **Build Docker Image** – Docker image built using custom build context
+* **Verify Docker Image** – Image existence validated via Docker CLI
+
+---
+
+## 🔐 Key Implementation Highlights
+
+* Jenkins runs inside a **Docker container**
+* Docker socket (`/var/run/docker.sock`) is mounted to allow Jenkins to run Docker commands
+* Docker CLI installed inside Jenkins container
+* Jenkins user added to Docker group to fix permission issues
+* Docker image built from a **subdirectory** using custom Docker build context
+
+---
+
+## 🧠 Challenges & Solutions
+
+| Challenge                    | Solution                                                      |
+| ---------------------------- | ------------------------------------------------------------- |
+| Jenkins unable to run Docker | Installed Docker CLI and mounted Docker socket                |
+| Docker permission denied     | Added Jenkins user to Docker group and fixed socket ownership |
+| Jenkinsfile not detected     | Moved Jenkinsfile to repository root                          |
+| Dockerfile not found         | Explicitly defined Dockerfile path and build context          |
+
+---
+
+## ✅ Outcome
+
+* Fully functional **local CI/CD pipeline**
+* Automated Docker image builds using Jenkins
+* Real-world troubleshooting experience with Jenkins and Docker
+---
+
+✅ *This project focuses on practical implementation and real troubleshooting rather than theoretical setup.*
 
 Author
-Abhay Choudhary – DevOps Enthusiast
+Abhay Choudhary 
+DevOps Engineer | Jenkins | Docker | Linux
 GitHub: https://github.com/abhaykr0316
